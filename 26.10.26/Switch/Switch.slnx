@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Switch/Switch.csproj">
+    <BuildType Project="Release" />
+  </Project>
+</Solution>
