@@ -1,0 +1,20 @@
+Console.WriteLine("Sisesta elupunktid 1-100");
+int elupunktid = int.Parse(Console.ReadLine());
+
+if (elupunktid >= 1 && elupunktid <= 29)
+    {
+    Console.WriteLine("Valed elupunktid! Sisestasid: " + elupunktid);
+}
+if (elupunktid >= 30 && elupunktid <= 69)
+{
+    Console.WriteLine("Valed elupunktid! Sisestasid: " + elupunktid);
+}
+
+if (elupunktid >= 70 && elupunktid <= 100)
+{
+    Console.WriteLine("Valed elupunktid! Sisestasid: " + elupunktid);
+}
+else 
+{
+    Console.WriteLine("Pole õige number.");
+}
