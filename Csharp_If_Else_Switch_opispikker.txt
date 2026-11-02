@@ -1,0 +1,288 @@
+C# IF / ELSE / SWITCH - ÕPPESPIKKER
+==================================
+Praktiline juhend Visual Studio kontrolltööks.
+
+See spikker aitab valida sobiva koodimustri ka siis, kui õpetaja
+annab eelmise ülesandega võrreldes teistsuguse variandi.
+Näited on C#-is. Koodinäited on õppimiseks koostatud/kohandatud,
+mitte õpetaja kontrolltöö täpsed ülesanded.
+
+
+1. MILLEKS MIDA KASUTADA?
+------------------------
+Kui ülesandes öeldakse...                Kasuta...
+"Kui arv on suurem kui ..."             if
+"Vastasel juhul ..."                    else
+"Kui ...; muidu kui ..."                else if
+"Vali üks mitmest tegevusest"           switch ja case
+"Kutsu meetod välja"                    MeetodiNimi();
+
+
+2. ANDMETE KÜSIMINE JA VÄLJASTAMINE
+----------------------------------
+Console.WriteLine("Mis su nimi on?");
+string nimi = Console.ReadLine();
+
+Console.WriteLine("Sisesta täisarv:");
+int arv = int.Parse(Console.ReadLine());
+
+Console.WriteLine($"Tere {nimi}, sinu arv on {arv}!");
+
+MEELDEJÄTMISEKS:
+- Console.WriteLine(...) kirjutab midagi ekraanile.
+- Console.ReadLine() loeb kasutaja sisestatud teksti.
+- int.Parse(...) teisendab sisestatud teksti täisarvuks.
+- float.Parse(...) teisendab sisestatud teksti komaarvuks.
+- string salvestab teksti, int täisarvu, float/double komaarvu.
+
+
+3. VÕRDLUS- JA LOOGIKAOPERAATORID
+--------------------------------
+==     võrdub                  arv == 10
+!=     ei võrdu                arv != 10
+>      suurem kui              arv > 10
+<      väiksem kui             arv < 10
+>=     suurem või võrdne       arv >= 10
+<=     väiksem või võrdne      arv <= 10
+&&     JA (mõlemad sobivad)    arv >= 0 && arv <= 40
+||     VÕI (vähemalt üks)      arv < 0 || arv > 100
+!      EI (pöörab ümber)       !valmis
+
+NB! Üks võrdusmärk (=) omistab väärtuse; kaks (==) võrdlevad.
+
+
+4. IF / ELSE IF / ELSE
+---------------------
+Tingimusi kontrollitakse ülevalt alla. Käivitub esimene sobiv
+haru. Kui ükski ei sobi, käivitub else (kui see on olemas).
+
+Console.WriteLine("Sisesta vanus:");
+int vanus = int.Parse(Console.ReadLine());
+
+if (vanus >= 18)
+{
+    Console.WriteLine("Täisealine");
+}
+else if (vanus >= 13)
+{
+    Console.WriteLine("Teismeline");
+}
+else
+{
+    Console.WriteLine("Noorem kui 13");
+}
+
+ÕPETAJA REPO MAJA SUURUSE NÄITE PÕHJAL:
+Näiteks võib kontrollida järgmisi vahemikke: 0-40, 41-90,
+91-130 ja üle 130. Siin on lisatud ka negatiivse arvu kontroll.
+
+Console.WriteLine("Sisesta maja suurus:");
+int maja = int.Parse(Console.ReadLine());
+
+if (maja < 0)
+{
+    Console.WriteLine("Vale suurus!");
+}
+else if (maja <= 40)
+{
+    Console.WriteLine("Väike maja");
+}
+else if (maja <= 90)
+{
+    Console.WriteLine("Keskmine maja");
+}
+else if (maja <= 130)
+{
+    Console.WriteLine("Suur maja");
+}
+else
+{
+    Console.WriteLine("Väga suur maja");
+}
+
+Sama mustrit saad kasutada vanuse, punktide, hinnete ja
+näiteks temperatuuri vahemike kontrollimiseks.
+
+
+5. SWITCH / CASE JA MEETOD
+-------------------------
+switch valib muutuja väärtuse põhjal sobiva case'i. Ühe
+switch-käsu täitmisel ei käivitu automaatselt kõik case'id.
+- case "tekst":  on üks võimalik väärtus.
+- break;         lõpetab selle case'i.
+- default:       käivitub siis, kui ükski case ei sobi.
+
+TERVE TÖÖTAV PROGRAMM:
+
+using System;
+
+namespace SwitchNaide
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Kirjuta: liida, nimi või auh");
+            string valik = Console.ReadLine();
+
+            switch (valik)
+            {
+                case "liida":
+                    Console.WriteLine("Sisesta esimene arv:");
+                    int a = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Sisesta teine arv:");
+                    int b = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine($"Tulemus: {a + b}");
+                    break;
+
+                case "nimi":
+                    Console.WriteLine("Mis su nimi on?");
+                    string nimi = Console.ReadLine();
+                    Console.WriteLine($"Tere, {nimi}!");
+                    break;
+
+                case "auh":
+                    Auh(); // meetodi väljakutsumine
+                    break;
+
+                default:
+                    Console.WriteLine("Tundmatu käsk");
+                    break;
+            }
+        }
+
+        static void Auh()
+        {
+            Console.WriteLine("Auh!");
+        }
+    }
+}
+
+NB! Meetodi Auh() VÄLJAKUTSUMINE on Auh();
+Meetodi KIRJELDUS on static void Auh() { ... }.
+Meetod asub Program-klassi sees, aga Main-meetodist väljaspool.
+
+Tekst peab täpselt sobima: "auh" ja "Auh" ei ole sama valik.
+
+
+6. IF JA SWITCH ÜHES PROGRAMMIS
+------------------------------
+Kui nõutakse nii if/else'i, mitut case'i kui ka meetodit:
+
+using System;
+
+namespace TingimusedJaSwitch
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Sisesta vanus:");
+            int vanus = int.Parse(Console.ReadLine());
+
+            if (vanus >= 18)
+            {
+                Console.WriteLine("Oled täisealine");
+            }
+            else
+            {
+                Console.WriteLine("Oled alaealine");
+            }
+
+            Console.WriteLine("Kirjuta: tere või auh");
+            string valik = Console.ReadLine();
+
+            switch (valik)
+            {
+                case "tere":
+                    Console.WriteLine("Mis su nimi on?");
+                    string nimi = Console.ReadLine();
+                    Console.WriteLine($"Tere, {nimi}!");
+                    break;
+
+                case "auh":
+                    Auh();
+                    break;
+
+                default:
+                    Console.WriteLine("Vale valik!");
+                    break;
+            }
+        }
+
+        static void Auh()
+        {
+            Console.WriteLine("Auh!");
+        }
+    }
+}
+
+See on näide, mitte nõue lisada menüü igasse programmi.
+Kui ülesanne nõuab muid tegevusi, muuda case'ide sisu.
+
+
+7. KUIDAS LAHENDADA UUT ÜLESANDEVARIANTI?
+---------------------------------------
+1) Leia SISENDID: mida programm küsima peab?
+2) Vali MUUTUJAD: nimi = string, vanus = int jne.
+3) Leia TINGIMUSED: "kui" -> if; "muidu" -> else.
+4) Leia VALIKUD: mitu konkreetset väärtust -> switch/case.
+5) Lisa iga case'i sisse vajalik tehe, küsimus või meetodi kutse.
+6) Käivita Visual Studios Ctrl + F5 ja proovi eri sisendeid.
+
+NB! Ära lisa tehteid või valikuid, mida ülesandes ei küsita.
+
+
+8. KIIRE VEAKONTROLL
+--------------------
+Probleem: if-i võrdlus ei tööta.
+Kontrolli: kas kirjutasid == (mitte =)?
+
+Probleem: arvu sisestamisega tekib viga.
+Kontrolli: kas kasutasid int.Parse(...) või float.Parse(...)?
+
+Probleem: switch ei leia case'i.
+Kontrolli: kas sisend vastab täpselt case'i tekstile?
+
+Probleem: meetodit ei leita.
+Kontrolli: kas meetod on klassi sees, aga Main-ist väljas?
+
+Probleem: case'i juures tekib viga.
+Kontrolli: kas vajalik break; on olemas?
+
+Probleem: programm ei kompileeru.
+Kontrolli: sulud { }, ( ), semikoolonid ; ja jutumärgid.
+
+
+9. HARJUTUSÜLESANDED
+-------------------
+A) Küsi temperatuur. Kui alla 0, kuva "Külm";
+   kui 0-20, kuva "Jahe"; muidu kuva "Soe".
+
+B) Küsi käsk "nimi", "arv" või "auh".
+   Tee kolm case'i: küsi nimi, küsi üks täisarv või kutsu Auh().
+
+C) Küsi vanus. Kontrolli if/else abil, kas kasutaja on
+   vähemalt 18. Seejärel küsi "tere" või "auh" ja kasuta switch'i.
+
+
+10. ÕPETAJA GITHUB
+------------------
+Repo:
+https://github.com/iki327/IKT26_1ProgemiseAlused
+
+If / Else näited:
+https://github.com/iki327/IKT26_1ProgemiseAlused/blob/main/c_if_else_
+
+Maja suuruse näide:
+https://github.com/iki327/IKT26_1ProgemiseAlused/blob/main/IfAndElseHouse.txt
+
+Switch'i ja meetodi näide:
+https://github.com/iki327/IKT26_1ProgemiseAlused/blob/main/SwitchTestruhm2/ConsoleApp1/ConsoleApp1/Program.cs
+
+-------------------------
+See fail on õppespikker. Näidiskoodid on iseseisvalt koostatud
+või õpetaja repo ideede põhjal kohandatud; need ei pruugi olla
+samad, mis kontrolltöös.
