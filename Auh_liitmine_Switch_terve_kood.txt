@@ -1,0 +1,66 @@
+using System;
+
+namespace Switch
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Sisesta esimene number:");
+            float number1 = float.Parse(Console.ReadLine());
+
+            Console.WriteLine("Vali tehe: +");
+            string tehe = Console.ReadLine();
+
+            Console.WriteLine("Sisesta teine number:");
+            float number2 = float.Parse(Console.ReadLine());
+
+            float tulemus = 0;
+            string nimi = "";
+
+            // Kolm järjestikust sammu, igaüks oma case'i sees.
+            for (int samm = 1; samm <= 3; samm++)
+            {
+                switch (samm)
+                {
+                    case 1:
+                        // Lubatud on ainult liitmine.
+                        if (tehe != "+")
+                        {
+                            Console.WriteLine("Pole liitmine.");
+                            return;
+                        }
+
+                        tulemus = number1 + number2;
+                        break;
+
+                    case 2:
+                        // Küsi nime pärast liitmist.
+                        Console.WriteLine("Auh! Mis su nimi on?");
+                        nimi = Console.ReadLine();
+                        break;
+
+                    case 3:
+                        // Meetodi väljakutsumine.
+                        Console.WriteLine("Meetodi esile kutsumiseks kirjuta ja:");
+                        string method = Console.ReadLine();
+
+                        if (method == "ja")
+                        {
+                            Skibidimethod(nimi, tulemus);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ise ei tahtnud");
+                        }
+                        break;
+                }
+            }
+        }
+
+        static void Skibidimethod(string kasutajaNimi, float loppVastus)
+        {
+            Console.WriteLine($"Auh! {kasutajaNimi}, sinu vastus on {loppVastus}");
+        }
+    }
+}
