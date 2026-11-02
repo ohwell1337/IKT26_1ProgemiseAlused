@@ -1,0 +1,88 @@
+Kui ülesandes öeldakse...
+Loo täisarv int arv = 10;
+Loo tekst string nimi = "Mati";
+Loo komaarv double hind = 5.5;
+Loo tõeväärtus bool valmis = true;
+Loo üks tähemärk char taht = 'A';
+Küsi teksti string nimi = Console.ReadLine();
+Küsi täisarvu int arv = int.Parse(Console.ReadLine());
+Küsi komaarvu double arv = double.Parse(Console.ReadLine());
+Kirjuta midagi ekraanile Console.WriteLine("Tere!");
+Liida arvud int summa = arv1 + arv2;
+
+
+
+using System;
+
+namespace DataTypes
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // Kirjuta ülesande kood siia
+        }
+    }
+}
+
+
+
+
+Koosta programm, mis küsib kasutaja nime, vanust ja pikkust. Seejärel väljasta kasutaja andmed ning arvuta, kui vana ta on järgmisel aastal.”
+
+
+
+
+using System;
+
+namespace DataTypes
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // Nime küsimine
+            Console.WriteLine("Mis su nimi on?");
+            string nimi = Console.ReadLine();
+
+            // Vanuse küsimine
+            Console.WriteLine("Kui vana sa oled?");
+            int vanus = int.Parse(Console.ReadLine());
+
+            // Pikkuse küsimine
+            Console.WriteLine("Kui pikk sa oled?");
+            double pikkus = double.Parse(Console.ReadLine());
+
+            // Arvutamine
+            int uusVanus = vanus + 1;
+
+            // Tulemuse väljastamine
+            Console.WriteLine($"Tere {nimi}!");
+            Console.WriteLine($"Sinu pikkus on {pikkus} m.");
+            Console.WriteLine($"Järgmisel aastal oled {uusVanus}.");
+        }
+    }
+}
+
+
+
+
+Arvu salvestamine tekstina:
+
+
+Vale: int vanus = "16";
+Õige: int vanus = 16;
+
+
+Sisestatud teksti otse int-muutujasse panemine
+
+Vale: int arv = Console.ReadLine();
+Õige: int arv = int.Parse(Console.ReadLine());
+
+
+float-arvul puudub f
+Vale: float hind = 2.5;
+Ôige: float hind = 2.5f;
+
+
+
