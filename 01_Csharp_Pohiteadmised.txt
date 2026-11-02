@@ -1,0 +1,152 @@
+C# ÕPPESPICKER 1/3 — PÕHITEADMISED
+==================================
+Sisu: projekti algus, muutujad, andmetüübid, sisestamine, Parse, TryParse, operaatorid, väljastamine, meetodid.
+
+1. TÄIELIK PROGRAMMI PÕHI
+-------------------------
+using System;
+
+namespace Harjutus
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Tere!");
+        }
+    }
+}
+
+Uuemates Console App projektides võib olla ainult Console.WriteLine("Hello, World!");. Kui soovid vana struktuuri, vali projekti loomisel "Do not use top-level statements" või kirjuta ülaltoodud struktuur ise.
+
+2. ANDMETÜÜBID
+--------------
+byte: 8 bitti, 0...255. Näide: byte tase = 100;
+int: 32 bitti, -2147483648...2147483647. Näide: int vanus = 16;
+float: 32 bitti, ligikaudu ±3.4 * 10^38, umbes 6–9 tüvenumbrit. Näide: float hind = 2.5f;
+double: 64 bitti, suurem täpsus kui float. Näide: double pikkus = 1.75;
+string: tekst, muutuva pikkusega. Näide: string linn = "Tallinn";
+bool: true või false; salvestussuurus sõltub kontekstist. Näide: bool valmis = true;
+char: üks märk ülakomade vahel. Näide: char täht = 'A';
+
+Tähtis: string kasutab jutumärke "tekst"; char ülakomasid 'A'; float-liiteraali lõpus on f. int on täisarv, float/double võivad sisaldada murdosa.
+
+3. MUUTUJA LOOMINE JA MUUTMINE
+-----------------------------
+int punktid = 50;   // loomine ja algväärtus
+punktid = 70;       // väärtuse muutmine; tüüpi uuesti ei kirjutata
+int lisa = 10;
+punktid = punktid + lisa;
+// Muutuja peab enne kasutamist olema loodud ja vajadusel väärtustatud.
+
+4. SISEND: READLINE JA PARSE
+---------------------------
+Console.WriteLine("Mis su nimi on?");
+string nimi = Console.ReadLine();
+
+Console.WriteLine("Sisesta vanus:");
+int vanus = int.Parse(Console.ReadLine());
+
+Console.WriteLine("Sisesta komaarv:");
+float arv = float.Parse(Console.ReadLine());
+
+Console.WriteLine("Sisesta täpsem komaarv:");
+double pikkus = double.Parse(Console.ReadLine());
+
+Console.ReadLine() annab stringi. int.Parse muudab teksti täisarvuks; float.Parse muudab komaarvuks. Kui tekst pole sobiv arv, Parse viskab erindi (programm võib katkeda). Komaarvu sisestamisel võib vajalik eraldaja sõltuda arvuti piirkonnasätetest (nt 2,5 või 2.5).
+
+5. TURVALISEM SISEND: TRYPARSE (TÄIELIK NÄIDE)
+----------------------------------------------
+using System;
+namespace Harjutus
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Sisesta täisarv:");
+            if (int.TryParse(Console.ReadLine(), out int arv))
+            {
+                Console.WriteLine($"Sisestasid {arv}");
+            }
+            else
+            {
+                Console.WriteLine("Viga: see ei ole täisarv!");
+            }
+        }
+    }
+}
+
+6. OPERAATORID
+--------------
+=   omistamine: int arv = 5;
+==  võrdub: arv == 5
+!=  ei võrdu: arv != 5
+>   suurem: arv > 5
+<   väiksem: arv < 5
+>=  suurem või võrdne: arv >= 5
+<=  väiksem või võrdne: arv <= 5
+&&  JA: mõlemad tingimused peavad kehtima, nt arv >= 1 && arv <= 29
+||  VÕI: vähemalt üks tingimus peab kehtima, nt arv < 0 || arv > 100
+!   EI: pöörab booli vastupidiseks, nt !valmis
++   liitmine; stringide puhul ka teksti ühendamine
+-   lahutamine
+*   korrutamine
+/   jagamine (int/int annab täisarvulise tulemuse, nt 5 / 2 = 2)
+%   jääk: 5 % 2 = 1
+++  suurendab ühe võrra; -- vähendab ühe võrra
++=  lisab muutujale, nt arv += 3;
+
+7. VÄLJASTAMINE: ÜKS VÕI MITU RIDA
+----------------------------------
+Console.WriteLine("Tere"); // lisab reavahetuse
+Console.Write("Tere ");    // EI lisa reavahetust
+Console.Write("Mati");     // tulemuseks samal real "Tere Mati"
+
+string linn = "Tartu";
+float tulemus = 5;
+Console.WriteLine($"Kodulinn: {linn}, vastus: {tulemus}"); // ühel real
+Console.WriteLine("Kodulinn: " + linn + ", vastus: " + tulemus); // alternatiiv
+Console.WriteLine($"{linn}\n{tulemus}"); // \n tähendab uut rida
+Console.WriteLine($"Jagatis: {tulemus:F2}"); // kaks kohta pärast koma
+
+8. MEETODI LOOMINE JA VÄLJAKUTSUMINE
+-----------------------------------
+static void Hurraa()
+{
+    Console.WriteLine("Hurraaa!!");
+}
+// Main sees kutsu välja: Hurraa();
+// static void Hurraa() loob meetodi; Hurraa(); käivitab selle.
+// Meetod asub Main-ist väljaspool, kuid Program-klassi sees.
+
+// Meetod argumentidega:
+static void NaidaTulemus(string linn, float vastus)
+{
+    Console.WriteLine($"{linn}: {vastus}");
+}
+// Main sees: NaidaTulemus("Tallinn", 5);
+
+// Tagastava meetodi näide:
+static int Liida(int a, int b)
+{
+    return a + b;
+}
+// Main sees: int summa = Liida(3, 4);
+
+9. TÜÜPILISED VEAD
+------------------
+VALE: int arv = Console.ReadLine();
+ÕIGE: int arv = int.Parse(Console.ReadLine());
+VALE: string nimi = Console.WriteLine("Tere");
+ÕIGE: Console.WriteLine("Tere"); string nimi = Console.ReadLine();
+VALE: if (arv = 5)   // omistamine, mitte võrdlus
+ÕIGE: if (arv == 5)
+VALE: float hind = 2.5;
+ÕIGE: float hind = 2.5f;
+VALE: string nimi = Mati;
+ÕIGE: string nimi = "Mati";
+
+10. KIIRKONTROLL ENNE KÄIVITAMIST
+--------------------------------
+Kas igal lausel on ; ? Kas { ja } on paaris? Kas stringid on "" sees? Kas muutujad on loodud? Kas Parse saab sobiva sisendi? Kas jagaja pole null? Kas meetodi nimi väljakutses vastab definitsioonile? Käivita Ctrl+F5.
