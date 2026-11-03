@@ -1,0 +1,8 @@
+else if (elud >= 1 && elud <= 29)
+{
+    Console.WriteLine($"Oled vigastatud! Sisestasid: {elud}");
+}
+
+
+Sama rea valjund ja 1-29 elud.
+Oled vigastatud! Sisestasid: 25
