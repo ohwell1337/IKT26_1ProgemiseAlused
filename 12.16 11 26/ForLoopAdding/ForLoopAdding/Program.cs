@@ -14,7 +14,7 @@
             for (int a = 0; a < kordused; a++) // -- esimene kill koll
             {
                 for (int b = 0; b < 2; b++) // -- teine killadi koll
-                {
+                {        
                     Console.WriteLine("kill - koll");
                 }
                 Console.WriteLine("killadi - koll");
